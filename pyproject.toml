@@ -8,7 +8,3 @@ author = "Sander Teunissen"
 author-email = "no_mail@nomail.com"
 home-page = "https://github.com/sander76/consoler"
 classifiers = ["License :: OSI Approved :: MIT License"]
-requires-python = ">=3.6"
-requires = [
-    "colorama==0.4.3"
-    ]

@@ -1,41 +1,19 @@
-"""Package with helper functions to get some unity output on my console apps."""
+"""Output helper functions."""
 
 import logging
-import asyncio
-from colorama import Fore, Style
 
-__version__ = "0.1"
+from pyconsoler.const import RIGHT_PAD
+
+
+
+
+
+import asyncio
+from colorama import Style
+import time
+
 _LOGGER = logging.getLogger(__name__)
 
-bouncing_bar = {
-    "interval": 80,
-    "frames": [
-        "[    ]",
-        "[   =]",
-        "[  ==]",
-        "[ ===]",
-        "[====]",
-        "[=== ]",
-        "[==  ]",
-        "[=   ]",
-        "[    ]",
-        "[=   ]",
-        "[==  ]",
-        "[=== ]",
-        "[====]",
-        "[ ===]",
-        "[  ==]",
-        "[   =]",
-    ],
-}
-
-ERROR_COLOR = Fore.RED + Style.BRIGHT
-SUCCESS = Fore.GREEN
-
-RIGHT_PAD = 10
-BIG_RIGHT_PAD = 25
-SMALL_RIGHT_PAD = 5
-PAGE_WIDTH = 80
 
 
 def _out(text, color=None, end="\n"):
@@ -73,3 +51,26 @@ def print_key_value(key, value, spacing=RIGHT_PAD, color=None):
     """
     _str = str(key).ljust(spacing) + str(value)
     _out(_str, color=color)
+
+
+def get_time_stamp(
+    time_sec=None,
+    add_date=True,
+    add_time=True,
+    date_sep="-",
+    time_sep=":",
+    date_time_sep=" ",
+) -> str:
+    if time_sec is None:
+        _date = time.strftime(f"%Y{date_sep}%m{date_sep}%d")
+        _time = time.strftime(f"%H{time_sep}%M{time_sep}%S")
+    else:
+        _date = time.strftime(f"%Y{date_sep}%m{date_sep}%d", time.localtime(time_sec))
+        _time = time.strftime(f"%H{time_sep}%M{time_sep}%S", time.localtime(time_sec))
+
+    if add_date and add_time:
+        return f"{_date}{date_time_sep}{_time}"
+    elif add_date:
+        return _date
+    else:
+        return _time
