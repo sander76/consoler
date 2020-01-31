@@ -1,19 +1,20 @@
 """Output helper functions."""
 
-import logging
-
-from pyconsoler.const import RIGHT_PAD
-
-
-
-
-
 import asyncio
-from colorama import Style
+import logging
 import time
+from sys import platform
+
+from colorama import Style
+
+from pyconsoler.const import RIGHT_PAD, ERROR_COLOR, ATTENTION_COLOR
+
+if platform == "win32":
+    from colorama import init
+
+    init()
 
 _LOGGER = logging.getLogger(__name__)
-
 
 
 def _out(text, color=None, end="\n"):
@@ -23,19 +24,25 @@ def _out(text, color=None, end="\n"):
         print(Style.RESET_ALL + text, end=end)
 
 
-async def print_waiting_countdown(delay: int):
+async def print_waiting_countdown(delay: int, clear=False):
     """Print a waiting message including a countdown timer
 
     Args:
-        delay The amount of seconds to countdown.
+        delay: The amount of seconds to countdown.
+        clear: If True the countdown text is erased after finished.
 
     Returns:
 
     """
+    prev = 0
     for i in range(delay, 0, -1):
-        print(f"waiting for {i} seconds\r", end="", flush=True)
+        txt = f"waiting for {i} seconds\r"
+        prev = len(txt)
+        print(ATTENTION_COLOR + txt, end="", flush=True)
         await asyncio.sleep(1)
-    print("\n", end="")
+
+    if clear:
+        print(f"{prev*' '}{Style.RESET_ALL}\r", end="")
 
 
 def print_key_value(key, value, spacing=RIGHT_PAD, color=None):
