@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 module = "pyconsoler"
 author = "Sander Teunissen"
 author-email = "no_mail@nomail.com"
-home-page = "https://github.com/sander76/pyconsoler"
+home-page = "https://github.com/sander76/consoler"
 classifiers = ["License :: OSI Approved :: MIT License"]
 requires = ["colorama"]
 requires-python=">=3.6"
