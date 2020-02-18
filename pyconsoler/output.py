@@ -61,6 +61,12 @@ def print_key_value(key, value, spacing=RIGHT_PAD, color=None):
     _out(_str, color=color)
 
 
+def key_value(key, value, spacing=RIGHT_PAD):
+    """Return a key value pair with proper spacing."""
+
+    return f"{key.ljust(spacing)}{value}"
+
+
 def bordered_text(text: str, hor_spacing=2) -> Tuple[str]:
     """Put a border around a string
 
