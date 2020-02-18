@@ -4,6 +4,7 @@ import asyncio
 import logging
 import time
 from sys import platform
+from typing import Tuple
 
 from colorama import Style
 
@@ -58,6 +59,24 @@ def print_key_value(key, value, spacing=RIGHT_PAD, color=None):
     """
     _str = str(key).ljust(spacing) + str(value)
     _out(_str, color=color)
+
+
+def bordered_text(text: str, hor_spacing=2) -> Tuple[str]:
+    """Put a border around a string
+
+    Args:
+        text: The text to border
+        hor_spacing: Empty space left and right from the string
+
+    Returns:
+
+    """
+    border_width = len(text) + 2 * hor_spacing
+    top = f"┏{border_width * '━'}┓"
+    middle = f"┃{text.center(border_width)}┃"
+    bottom = f"┗{border_width * '━'}┛"
+
+    return (top, middle, bottom)
 
 
 def get_time_stamp(
