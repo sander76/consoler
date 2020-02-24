@@ -12,3 +12,5 @@ classifiers = ["License :: OSI Approved :: MIT License"]
 requires = ["colorama"]
 requires-python=">=3.6"
 
+[tool.flit.scripts]
+pyconsoler = "pyconsoler.cli:main"

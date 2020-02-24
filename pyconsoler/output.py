@@ -25,6 +25,13 @@ def _out(text, color=None, end="\n"):
         print(Style.RESET_ALL + text, end=end)
 
 
+def prt(text, color=None, end="\n"):
+    if isinstance(text, str):
+        _out(text, color, end)
+    for txt in text:
+        _out(txt, color, end)
+
+
 async def print_waiting_countdown(delay: int, clear=False):
     """Print a waiting message including a countdown timer
 
