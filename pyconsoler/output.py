@@ -20,16 +20,17 @@ _LOGGER = logging.getLogger(__name__)
 
 def _out(text, color=None, end="\n"):
     if color:
-        print(color + text, end=end)
+        print(f"{color}{text}", end=end)
     else:
-        print(Style.RESET_ALL + text, end=end)
+        print(f"{Style.RESET_ALL}{text}", end=end)
 
 
 def prt(text, color=None, end="\n"):
-    if isinstance(text, str):
+    if isinstance(text,list) or isinstance(text,tuple):
+        for txt in text:
+            _out(txt,color,end)
+    else:
         _out(text, color, end)
-    for txt in text:
-        _out(txt, color, end)
 
 
 async def print_waiting_countdown(delay: int, clear=False):
